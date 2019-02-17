@@ -62,5 +62,12 @@
         android:text="@string/click"
         tools:text="Click the button above to take a picture" />
 
+    <Button
+        android:id="@+id/goToChat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/goToChat"
+        android:gravity="fill"
+        android:textAlignment="center" />
 
 </LinearLayout>

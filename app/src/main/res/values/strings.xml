@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lab3</string>
+    <string name="app_name">Lab4</string>
     <string name="hello_message">Hello World!</string>
     <string name="TextView1">Enter your email address:</string>
     <string name="EditText1">Type email here</string>
@@ -12,5 +12,7 @@
     <string name="picture">Your picture:</string>
     <string name="click">Click the button above to take a picture</string>
     <string name="ButtonText">LOGIN</string>
-
+    <string name="goToChat">Go to chat</string>
+    <string name="send">send</string>
+    <string name="receive">receive</string>
 </resources>
