@@ -70,4 +70,13 @@
         android:gravity="fill"
         android:textAlignment="center" />
 
+    <Button
+        android:id="@+id/goToToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/goToToolbar"
+        android:gravity="fill"
+        android:textAlignment="center" />
+
+
 </LinearLayout>

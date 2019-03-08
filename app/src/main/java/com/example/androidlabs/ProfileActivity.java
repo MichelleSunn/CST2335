@@ -1,15 +1,24 @@
 package com.example.androidlabs;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -17,7 +26,7 @@ public class ProfileActivity extends AppCompatActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
     Button chat;
-
+    Button toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -26,6 +35,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         mImageButton = (ImageButton) findViewById(R.id.photo);
         chat = findViewById(R.id.goToChat);
+        toolbar = findViewById(R.id.goToToolbar);
+
         mImageButton.setOnClickListener(a -> {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -38,7 +49,11 @@ public class ProfileActivity extends AppCompatActivity {
         Log.e(ACTIVITY_NAME, "In function:" + "onCreate");
 
         Intent gotochat = new Intent(this,ChatRoomActivity.class);
-        chat.setOnClickListener(a->{startActivity(gotochat);});
+        chat.setOnClickListener(a->startActivity(gotochat));
+
+        Intent gototoolbar = new Intent(this, TestToolbar.class);
+        toolbar.setOnClickListener(b->startActivity(gototoolbar));
+
     }
 
 

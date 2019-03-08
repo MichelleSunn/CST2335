@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">实验课5</string>
+    <string name="app_name">实验课6</string>
     <string name="hello_message">你好！</string>
     <string name="TextView1">输入你的电子邮箱：</string>
     <string name="EditText1">在这里输入电子邮箱</string>
@@ -14,6 +14,12 @@
     <string name="click">点击上方按钮拍照</string>
     <string name="ButtonText">登陆</string>
     <string name="goToChat">去聊天吧</string>
+    <string name="goToToolbar">去工具条</string>
     <string name="send">发送</string>
     <string name="receive">接收</string>
+    <string name="choice1">提示</string>
+    <string name="choice2">对话框</string>
+    <string name="choice3">小吃</string>
+    <string name="choice4">忍者神龟</string>
+    <string name="diaText">您的新消息?</string>
 </resources>
