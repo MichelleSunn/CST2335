@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -27,6 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
     public static final String ACTIVITY_NAME = "PROFILE_ACTIVITY";
     Button chat;
     Button toolbar;
+    Button weather;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,6 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
         mImageButton = (ImageButton) findViewById(R.id.photo);
         chat = findViewById(R.id.goToChat);
         toolbar = findViewById(R.id.goToToolbar);
+        weather = findViewById(R.id.gotoWeather);
+
 
         mImageButton.setOnClickListener(a -> {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -53,6 +58,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         Intent gototoolbar = new Intent(this, TestToolbar.class);
         toolbar.setOnClickListener(b->startActivity(gototoolbar));
+
+        Intent gotoWeather = new Intent(this, WeatherForecast.class);
+        weather.setOnClickListener(b->startActivity(gotoWeather));
 
     }
 

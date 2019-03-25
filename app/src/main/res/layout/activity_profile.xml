@@ -78,5 +78,13 @@
         android:gravity="fill"
         android:textAlignment="center" />
 
+    <Button
+        android:id="@+id/gotoWeather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gotoWeather"
+        android:gravity="fill"
+        android:textAlignment="center" />
+
 
 </LinearLayout>

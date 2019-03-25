@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">实验课6</string>
+    <string name="app_name">实验课7</string>
     <string name="hello_message">你好！</string>
     <string name="TextView1">输入你的电子邮箱：</string>
     <string name="EditText1">在这里输入电子邮箱</string>
@@ -22,4 +22,5 @@
     <string name="choice3">小吃</string>
     <string name="choice4">忍者神龟</string>
     <string name="diaText">您的新消息?</string>
+    <string name="gotoWeather">天气预报</string>
 </resources>
