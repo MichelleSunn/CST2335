@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignRight="@id/the_list"
         android:text="@string/receive"
         android:gravity="fill"
         android:textAlignment="center" />
@@ -39,15 +39,21 @@
         <!--android:layout_above="@id/send"-->
         <!--&gt;-->
 
-       <!---->
-
-
-
     <!--</android.support.v4.widget.SwipeRefreshLayout>-->
-
     <ListView
         android:id="@+id/the_list"
+        android:layout_width="300dp"
+        android:layout_height="match_parent" />
+
+    <FrameLayout
+        android:id="@+id/fragmentLocation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent"
+        android:layout_toRightOf="@id/the_list">
+
+
+    </FrameLayout>
+
 </RelativeLayout>
 

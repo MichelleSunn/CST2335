@@ -2,6 +2,7 @@ package com.example.androidlabs;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +41,14 @@ public class ChatRoomActivity extends AppCompatActivity {
     Message newMessage;
     ArrayList<Message> msg = new ArrayList<>();
     MyDatabaseOpenHelper dbOpener;
+    SQLiteDatabase db;
     Cursor results;
+
+    private static int ACTIVITY_CHATFRAGMENT = 40;
+    private static int ACTIVITY_PHONEFRAGMENT = 33;
+    public static final int EMPTY_ACTIVITY = 345;
+    //protected SQLiteDatabase db = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +69,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         //get a database
         dbOpener = new MyDatabaseOpenHelper(this);
-        SQLiteDatabase db = dbOpener.getWritableDatabase();
+        db = dbOpener.getWritableDatabase();
 
         //query all the results from the database:
         String [] columns = {MyDatabaseOpenHelper.COL_ID, MyDatabaseOpenHelper.COL_MESSAGE, MyDatabaseOpenHelper.COL_TYPE};
@@ -139,7 +149,80 @@ public class ChatRoomActivity extends AppCompatActivity {
         });
 
         theList.setAdapter(adt);
+
+        boolean isTablet = findViewById(R.id.fragmentLocation) != null;
+        //theAdapter = new ArrayAdapter<Message>(this, android.R.layout.simple_list_item_1, msg);
+        theList.setAdapter( adt );
+        theList.setOnItemClickListener((parent, view, position, id)-> {
+            //positionClicked = position;
+            //databaseID = id;
+            Bundle dataToPass = new Bundle();
+
+            dataToPass.putString("Message", msg.get(position).getMessage());
+            dataToPass.putLong("id", id);
+            if(isTablet)
+            {
+                ChatFragment dFragment = new ChatFragment(); //add a DetailFragment
+                //dFragment.msg.setText("");
+                //dFragment.databaseiID.setText("");
+                dFragment.setArguments( dataToPass ); //pass it a bundle for information
+                dFragment.setTablet(true);  //tell the fragment if it's running on a tablet or not
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.fragmentLocation, dFragment) //Add the fragment in FrameLayout
+                        .addToBackStack("AnyName") //make the back button undo the transaction
+                        .commit(); //actually load the fragment.
+            }
+            else //isPhone
+            {
+                Intent nextActivity = new Intent(ChatRoomActivity.this, EmptyActivity.class);
+                nextActivity.putExtras(dataToPass); //send data to next activity
+                startActivityForResult(nextActivity,EMPTY_ACTIVITY); //make the transition
+            }
+
+
+        });
+        adt.notifyDataSetChanged();
         printCursor(results);
+    }
+
+    //This function only gets called on the phone. The tablet never goes to a new activity
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == EMPTY_ACTIVITY)
+        {
+            if(resultCode == RESULT_OK) //if you hit the delete button instead of back button
+            {
+
+                long id = data.getLongExtra("id", 0);
+                Log.i("Delete this message1:" , " id="+id);
+
+                deleteMessageId((int)id);
+            }
+        }
+    }
+
+    public void deleteMessageId(int id)
+    {
+
+        Log.i("Delete this message:" , " id="+id);
+        msg.remove(id);
+        String str="";
+        Cursor c;
+        String [] cols = {MyDatabaseOpenHelper.COL_ID, MyDatabaseOpenHelper.COL_MESSAGE, MyDatabaseOpenHelper.COL_TYPE};
+        c = db.query(false, MyDatabaseOpenHelper.TABLE_NAME, cols, null, null, null, null, null, null);
+        if(c.moveToFirst()) {
+
+                for (int i =0; i<id; i++) {
+                    c.moveToNext();
+
+                }
+            str = c.getString(c.getColumnIndex("_id"));
+        }
+        int x = db.delete("Message", "_id=?", new String[] {str});
+        Log.i("ViewContact", "Deleted " + x + " rows");
+        //db.delete(dbOpener.TABLE_NAME, dbOpener.COL_ID+"=?", new String[] {String.valueOf(id)});
+        adt.notifyDataSetChanged();
     }
 
 
